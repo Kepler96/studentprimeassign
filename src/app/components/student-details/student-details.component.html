@@ -1,0 +1,19 @@
+<div *ngIf="student">
+    <h2>Edit Student Details</h2>
+    <div>
+      <label for="name">Name</label>
+      <input id="name" type="text" [(ngModel)]="student.name" />
+    </div>
+    <div>
+      <label for="age">Age</label>
+      <input id="age" type="number" [(ngModel)]="student.age" />
+    </div>
+    <div>
+      <label for="marks">Marks</label>
+      <input id="marks" type="number" [(ngModel)]="student.marks" />
+    </div>
+    <button (click)="onSave()">Save</button>
+    <button (click)="onCancel()">Cancel</button>
+  </div>
+  
+

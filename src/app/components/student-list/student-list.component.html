@@ -1,0 +1,70 @@
+<div class="student-list-container">
+    <p-table [value]="students" selectionMode="single" [(selection)]="selectedStudent">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+          <th pSortableColumn="age">Age <p-sortIcon field="age"></p-sortIcon></th>
+          <th pSortableColumn="marks">Marks <p-sortIcon field="marks"></p-sortIcon></th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-student>
+        <tr>
+          <td>{{ student?.name }}</td>
+          <td>{{ student.age }}</td>
+          <td>{{ student.marks }}</td>
+          <td>
+            <button pButton icon="pi pi-pencil" (click)="editStudent(student)">Edit</button>
+            <button pButton icon="pi pi-trash" (click)="deleteStudent(student.id)">Delete</button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-button label="Add Student" icon="pi pi-plus" (click)="addStudent()"></p-button>
+
+  <!-- Dialog for editing student details -->
+<!-- <p-dialog header="Edit Student" [(visible)]="selectedStudent" [modal]="true" [closable]="false">
+    <p-dialog header="Edit Student" [(visible)]="isDialogVisible" [modal]="true" [closable]="false">
+
+        <div class="p-fluid">
+            <div class="p-field">
+                <label for="name">Name</label>
+                <input id="name" type="text" pInputText [(ngModel)]="selectedStudent?.name" />
+            </div>
+            <div class="p-field">
+                <label for="age">Age</label>
+                <input id="age" type="number" pInputText [(ngModel)]="selectedStudent?.age" />
+            </div>
+            <div class="p-field">
+                <label for="marks">Marks</label>
+                <input id="marks" type="number" pInputText [(ngModel)]="selectedStudent?.marks" />
+            </div>
+        </div>
+        <p-footer>
+            <p-button label="Cancel" icon="pi pi-times" (click)="selectedStudent = null"></p-button>
+            <p-button label="Save" icon="pi pi-check" (click)="updateStudent()"></p-button>
+        </p-footer>
+    </p-dialog>
+    </div> -->
+    <p-dialog header="Edit Student" [(visible)]="isDialogVisible" [modal]="true" [closable]="false">
+        <div class="p-fluid">
+          <div class="p-field" *ngIf="selectedStudent">
+            <label for="name">Name</label>
+            <input id="name" type="text" pInputText [(ngModel)]="selectedStudent.name" />
+          </div>
+          <div class="p-field" *ngIf="selectedStudent">
+            <label for="age">Age</label>
+            <input id="age" type="number" pInputText [(ngModel)]="selectedStudent.age" />
+          </div>
+          <div class="p-field" *ngIf="selectedStudent">
+            <label for="marks">Marks</label>
+            <input id="marks" type="number" pInputText [(ngModel)]="selectedStudent.marks" />
+          </div>
+        </div>
+        <p-footer>
+          <p-button label="Cancel" icon="pi pi-times" (click)="cancelEdit()"></p-button>
+          <p-button label="Save" icon="pi pi-check" (click)="updateStudent()"></p-button>
+        </p-footer>
+      </p-dialog>
+      
